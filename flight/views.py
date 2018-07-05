@@ -1,4 +1,4 @@
-from django.http import HttpResponse
+from django.http import HttpResponse, Http404
 from django.shortcuts import render
 
 # Create your views here.
@@ -6,15 +6,17 @@ from flight.models import Flight, Airport
 
 
 def index(request):
-    # a = Airport(code='JFK', city='New York City')
-    # a.save()
-    #
-    # b = Airport(code='LHR', city='London')
-    # b.save()
-    #
-    # f = Flight(origin=a, destination=b, duration=415)
-    # f.save()
-
     return render(request, 'flight/index.html', {
         'flights': Flight.objects.all(),
+    })
+
+
+def view(request, flight_id):
+    try:
+        f = Flight.objects.get(pk=flight_id)
+    except Flight.DoesNotExist:
+        raise Http404('Flight does not exist.')
+
+    return render(request, 'flight/view.html', {
+        'flight': f,
     })

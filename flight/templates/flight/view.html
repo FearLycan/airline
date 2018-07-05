@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Flight from {{ flight.origin }} to {{ flight.destination }}
+{% endblock %}
+
+{% block content %}
+
+    <h1>Flight {{ flight.id }}</h1>
+
+    <p>
+        {{ flight }}
+    </p>
+
+    <p>
+        <a href="{% url 'index' %}">Back to full list</a>
+    </p>
+
+{% endblock %}
