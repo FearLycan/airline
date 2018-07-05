@@ -12,6 +12,16 @@
         {{ flight }}
     </p>
 
+    <h2>List of passengers</h2>
+
+    <ul>
+        {% for passenger in passengers %}
+            <li> {{ passenger }} </li>
+        {% empty %}
+            <li>List of passengers is empty.</li>
+        {% endfor %}
+    </ul>
+
     <p>
         <a href="{% url 'index' %}">Back to full list</a>
     </p>

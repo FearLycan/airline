@@ -13,10 +13,11 @@ def index(request):
 
 def view(request, flight_id):
     try:
-        f = Flight.objects.get(pk=flight_id)
+        model = Flight.objects.get(pk=flight_id)
     except Flight.DoesNotExist:
         raise Http404('Flight does not exist.')
 
     return render(request, 'flight/view.html', {
-        'flight': f,
+        'flight': model,
+        'passengers': model.passengers.all(),
     })
